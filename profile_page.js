@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const name = profileNameInput.value;
     const email = profileEmailInput.value;
 
-    const response = await fetch("http://localhost:5002/updateProfile", {
+    const response = await fetch("https://petcare-backend-fu30.onrender.com/updateProfile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId, name, email })
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     formData.append("profile_picture", file);
     formData.append("userId", userId);
 
-    fetch("http://localhost:5002/updateProfilePicture", {
+    fetch("https://petcare-backend-fu30.onrender.com/updateProfilePicture", {
       method: "POST",
       body: formData,
     })
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Load user and pet details
   try {
-    const response = await fetch(`http://localhost:5002/user/${userId}`);
+    const response = await fetch(`https://petcare-backend-fu30.onrender.com/user/${userId}`);
     const data = await response.json();
 
     if (response.ok) {
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       //   profilePreview.src = user.profile_picture;
       // }
       if (user.profile_picture) {
-    profilePreview.src = `http://localhost:5002/profilePicture/${userId}`;
+    profilePreview.src = `https://petcare-backend-fu30.onrender.com/profilePicture/${userId}`;
     }
 
 
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const pet_age = document.getElementById("pet-age").value;
     const pet_weight = document.getElementById("pet-weight").value;
 
-    const response = await fetch("http://localhost:5002/savePetProfile", {
+    const response = await fetch("https://petcare-backend-fu30.onrender.com/savePetProfile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 document.getElementById("logoutBtn").addEventListener("click", async () => {
   try {
-    const response = await fetch("http://localhost:5002/logout", {
+    const response = await fetch("https://petcare-backend-fu30.onrender.com/logout", {
       method: "POST",
       credentials: "include" // send cookies (for session)
     });

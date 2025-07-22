@@ -108,7 +108,7 @@
         appointment_time: appointmentTime
     };
 
-    fetch('/api/schedule-vaccine', {
+    fetch('https://petcare-backend-fu30.onrender.com/api/schedule-vaccine', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
