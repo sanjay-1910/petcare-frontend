@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Veterinary Hospitals</title>
+    <link rel="stylesheet" href="vetfinder.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-heart-pulse"></i>
+                    <h1>VetFinder</h1>
+                </div>
+                <p class="subtitle">Find trusted veterinary hospitals near you</p>
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-box">
+                    <div class="search-input-container">
+                        <i class="fas fa-map-marker-alt search-icon"></i>
+                        <input 
+                            type="text" 
+                            id="locationInput" 
+                            placeholder="Enter your city or location..."
+                            autocomplete="off"
+                        >
+                        <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
+                    </div>
+                    <button class="search-btn" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Section -->
+        <section class="loading-section" id="loadingSection">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Searching for veterinary hospitals...</p>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection">
+            <div class="results-header">
+                <h2 id="resultsTitle">Veterinary Hospitals</h2>
+                <p id="resultsCount"></p>
+            </div>
+            <div class="results-grid" id="resultsGrid"></div>
+        </section>
+
+        <!-- No Results Section -->
+        <section class="no-results-section" id="noResultsSection">
+            <div class="no-results-content">
+                <i class="fas fa-search"></i>
+                <h3>No veterinary hospitals found</h3>
+                <p>Try searching for a different location or check your spelling.</p>
+            </div>
+        </section>
+
+        <!-- Error Section -->
+        <section class="error-section" id="errorSection">
+            <div class="error-content">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Something went wrong</h3>
+                <p id="errorMessage">Please try again later.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="vetfinder.js"></script>
+</body>
+</html>

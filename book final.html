@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veterinarian Appointment</title>
+  <link rel="stylesheet" href="../css/book final.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Book an Appointment</h1>
+    <div class="form-group">
+      <label for="vet-name">Veterinarian Name:</label>
+      <input type="text" id="vet-name" disabled>
+    </div>
+    <div class="form-group">
+      <label for="vet-address">Veterinarian Address:</label>
+      <input type="text" id="vet-address" disabled>
+    </div>
+    <h3>Available Slots</h3>
+    <div class="slot-container" id="slot-container"></div>
+  </div>
+
+  <script>
+    window.onload = function () {
+  const selectedVet = JSON.parse(localStorage.getItem("selectedVet"));
+
+  if (selectedVet) {
+    document.getElementById("vet-name").value = selectedVet.name;
+    document.getElementById("vet-address").value = selectedVet.address;
+  }
+
+  renderSlots(); // Ensure slots are rendered after the page loads
+};
+
+const slots = generateSlots();
+const bookedSlots = new Set();
+
+function generateSlots() {
+  const slots = [];
+  let startTime = new Date();
+  startTime.setHours(9, 0, 0, 0); // Start at 9 AM
+
+  while (startTime.getHours() < 17) { // Until 5 PM
+    let hours = startTime.getHours();
+    let minutes = startTime.getMinutes();
+    let ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12; // Convert 24-hour format to 12-hour
+    let formattedTime = `${hours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
+    slots.push(formattedTime);
+    startTime.setMinutes(startTime.getMinutes() + 15);
+  }
+
+  return slots;
+}
+
+function renderSlots() {
+  const slotContainer = document.getElementById("slot-container");
+  slotContainer.innerHTML = "";
+
+  slots.forEach((slot) => {
+    const slotElement = document.createElement("div");
+    slotElement.className = bookedSlots.has(slot) ? "slot booked" : "slot";
+    slotElement.textContent = slot;
+
+    if (!bookedSlots.has(slot)) {
+      slotElement.addEventListener("click", () => bookSlot(slot));
+    }
+
+    slotContainer.appendChild(slotElement);
+  });
+}
+
+function bookSlot(slot) {
+  if (bookedSlots.has(slot)) {
+    alert("This slot is already booked!");
+  } else {
+    bookedSlots.add(slot);
+    renderSlots();
+    alert(`Slot ${slot} booked successfully!`);
+  }
+}
+  </script>
+</body>
+</html>

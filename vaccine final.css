@@ -1,0 +1,135 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: linear-gradient(to top right, #fff0f5, #ffe5b4, #ffc0cb);
+    animation: backgroundFade 8s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundFade {
+    0% {
+        background-image: linear-gradient(to top right, #fff0f5, #ffe5b4, #ffc0cb);
+    }
+    100% {
+        background-image: linear-gradient(to top right, #ffe4e1, #ffcccb, #ffb6c1);
+    }
+}
+
+.container {
+    background: #ffffff;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 450px;
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: scale(1.01);
+}
+
+h1 {
+    font-size: 28px;
+    color: #e75480;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 1px rgba(255, 192, 203, 0.7);
+}
+
+label {
+    display: block;
+    margin-top: 18px;
+    font-weight: 600;
+    color: #ff6f61;
+    text-align: left;
+}
+
+select,
+input[type="date"],
+input[type="time"] {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #ffb6c1;
+    border-radius: 8px;
+    background-color: #fff0f5;
+    transition: all 0.3s ease;
+    font-size: 15px;
+    color: #333;
+}
+
+select:focus,
+input:focus {
+    outline: none;
+    border-color: #ff69b4;
+    background-color: #ffe4e1;
+    box-shadow: 0 0 6px #ff69b4;
+}
+
+button {
+    background-image: linear-gradient(to right, #ff6f61, #ff1493);
+    color: white;
+    border: none;
+    padding: 12px;
+    margin-top: 25px;
+    width: 100%;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-image 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-image: linear-gradient(to right, #ff1493, #ff6f61);
+    transform: scale(1.03);
+}
+
+.error {
+    color: red;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+.confirmation,
+.reminder {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: none; /* Hide by default */
+}
+
+.confirmation {
+    background-color: #f0fff0;
+    border: 1px solid #28a745;
+    color: #28a745;
+}
+
+.reminder {
+    background-color: #fff5f5;
+    border: 1px solid #ff4500;
+    color: #ff4500;
+    font-style: italic;
+}
+
+.show {
+    display: block !important;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+}
+

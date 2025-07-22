@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Care Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f7;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #00bfa5;
+            font-size: 2.5rem;
+        }
+        .form-container, .dashboard {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .form-container h2, .dashboard h2 {
+            color: #00796b;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+        }
+        button {
+            background-color: #00bfa5;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        button:hover {
+            background-color: #00796b;
+        }
+        .dashboard h3 {
+            font-size: 1.25rem;
+            color: #004d40;
+        }
+        .dashboard .pet-details, .reminder-section {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+        .pet-details div, .reminder-section div {
+            background-color: #e0f7fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+        .reminder-section div {
+            background-color: #fff3e0;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Pet Care Management</h1>
+
+        <div class="form-container">
+            <h2>Enter Pet Details</h2>
+            <div class="form-group">
+                <label for="petName">Pet Name</label>
+                <input type="text" id="petName" placeholder="Enter your pet's name">
+            </div>
+            <div class="form-group">
+                <label for="breed">Breed</label>
+                <input type="text" id="breed" placeholder="Enter your pet's breed">
+            </div>
+            <div class="form-group">
+                <label for="vaccination">Last Vaccination Date</label>
+                <input type="date" id="vaccination">
+            </div>
+            <div class="form-group">
+                <label for="nextAppointment">Next Appointment</label>
+                <input type="date" id="nextAppointment">
+            </div>
+            <div class="form-group">
+                <label for="notes">Additional Notes</label>
+                <input type="text" id="notes" placeholder="Enter any additional information">
+            </div>
+            <button onclick="savePetDetails()">Save Pet Details</button>
+        </div>
+
+        <div class="dashboard">
+            <h2>Pet Dashboard</h2>
+            <div class="pet-details">
+                <h3>Your Pet's Info:</h3>
+                <div id="petInfo">
+                    <!-- Pet details will appear here -->
+                </div>
+            </div>
+
+            <div class="reminder-section">
+                <h3>Reminders</h3>
+                <div id="reminders">
+                    <!-- Reminders will appear here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function savePetDetails() {
+            const petName = document.getElementById('petName').value;
+            const breed = document.getElementById('breed').value;
+            const vaccination = document.getElementById('vaccination').value;
+            const nextAppointment = document.getElementById('nextAppointment').value;
+            const notes = document.getElementById('notes').value;
+
+            if (!petName || !breed || !vaccination || !nextAppointment) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            // Display pet info
+            const petInfoDiv = document.getElementById('petInfo');
+            petInfoDiv.innerHTML = `
+                <p><strong>Name:</strong> ${petName}</p>
+                <p><strong>Breed:</strong> ${breed}</p>
+                <p><strong>Last Vaccination Date:</strong> ${vaccination}</p>
+                <p><strong>Next Appointment:</strong> ${nextAppointment}</p>
+                <p><strong>Notes:</strong> ${notes}</p>
+            `;
+
+            // Display reminders
+            const reminderDiv = document.getElementById('reminders');
+            const today = new Date();
+            const nextAppointmentDate = new Date(nextAppointment);
+            const daysLeft = Math.floor((nextAppointmentDate - today) / (1000 * 60 * 60 * 24));
+
+            reminderDiv.innerHTML = `
+                <p>${daysLeft} days left for your pet's next appointment!</p>
+                <p>Don't forget the vaccination due on ${vaccination}.</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>

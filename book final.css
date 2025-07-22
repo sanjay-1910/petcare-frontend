@@ -1,0 +1,47 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(177 234 230);
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: rgba(255,255,255);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+    border-radius: 12px;
+    padding: 20px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    font-size: 18px;
+    display: block;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #aed9e0;
+    border-radius: 8px;
+}
+.slot-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+.slot {
+    padding: 10px;
+    background-color: #e0f7fa;
+    border: 1px solid #6cbea8;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+}
+.slot.booked {
+    background-color: #ffcdd2;
+    cursor: not-allowed;
+}

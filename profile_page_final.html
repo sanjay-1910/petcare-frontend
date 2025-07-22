@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Pet Care Services</title>
+  <link rel="stylesheet" href="profile_page.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Hello, <span id="profile-name-display">John Doe</span></h2>
+      <div class="profile-section">
+        <input type="file" id="profilePictureUpload" class="prof" accept="image/*"/>
+        <div class="profile-picture-wrapper">
+          <img id="profilePreview" src="" alt="Profile Picture" class="profile-picture" />
+        </div>
+        <input type="text" id="profile-name" value="John Doe" disabled />
+        <label for="profile-email">Email</label>
+        <input type="text" id="profile-email" value="john.doe@example.com" disabled />
+        <button id="edit-profile">Edit Profile</button>
+        <button id="save-profile" style="display: none;">Save Profile</button>
+      </div>
+
+      <div class="pet-profile-section">
+        <h3>Pet Profile</h3>
+        <label for="pet-name">Name</label>
+        <input type="text" id="pet-name" placeholder="Pet's Name" />
+        <label for="pet-type">Type</label>
+        <select id="pet-type">
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+          <option value="rabbit">Rabbit</option>
+          <option value="bird">Bird</option>
+        </select>
+        <label for="pet-breed">Breed</label>
+        <input type="text" id="pet-breed" placeholder="Pet's Breed" />
+        <label for="pet-age">Age</label>
+        <input type="number" id="pet-age" placeholder="Age in years" />
+        <label for="pet-weight">Weight</label>
+        <input type="number" id="pet-weight" placeholder="Weight in kg" />
+        <button id="edit-pet-profile">Edit Pet Details</button>
+        <button id="save-pet-profile" style="display: none;">Save Pet Profile</button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <h2>
+        Pet Care Services
+        <button id="logoutBtn" class="logout-button">Logout</button>
+        <!-- <button class="chatbot"><a href="/pages/chatbot3.html">Logout</a></button> -->
+      </h2>
+
+      <div class="service-container">
+        <h3>Vaccination Scheduling</h3>
+        <p>Schedule your pet’s vaccinations.</p>
+        <img src="../images/vaccination.jpg" alt="Vaccination" />
+        <a href="vaccine final.html">Click Here</a>
+        <!-- <p>hquodewbhcksdjlbgvhvhujlknjbvnfhcghujlknj,bmvfhcghujn,bm vgvhjnn,b vgvhujn,b vnvghjkv gvhjhquodewbhcksdjlbgvhvhujlknjbvnfhcghujlknj,bmvfhcghujn,bm vgvhjnn,b vgvhujn,b vnvghjkv gvhj</p> -->
+        <p class="desc">Schedule your pet’s vaccinations with ease! <br> friendly email reminders a day before – never miss a dose</p>
+      </div>
+
+      <div class="service-container">
+        <h3>Veterinarian Search</h3>
+        <p>Find veterinarians in your area.</p>
+        <img src="../images/pet veternanian.jpg" alt="Veterinarian" />
+        <a href="vetfinder.html">Click Here</a>
+        <p class="desc">Find the best veterinarians near you in seconds. <br>Get details, timings, and reviews – all in one place!</p>
+      </div>
+
+      <div class="service-container">
+        <h3>Disease Prediction</h3>
+        <p>Predict diseases based on symptoms.</p>
+        <img src="../images/pet walking.webp" alt="Disease Prediction" />
+        <a href="disease prediction.html">Click Here</a>
+      <p class="desc">Predict your pet’s health issues early. <br>Enter symptoms and get instant suggestions on possible diseases</p>
+      </div>
+
+      <div class="service-container">
+        <h3>Pet Chatbot</h3>
+        <p>Ask About Your Pet, Anytime!</p>
+        <img src="../images/chatbot.jpeg" alt="Pet Sitting" />
+        <a href="chatbot3.html">Click Here</a>
+      <p class="desc">Ask anything about your pet’s health, care, or needs. <br>Our chatbot is here 24/7 to guide you!</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="profile_page.js"></script>
+</body>
+</html>

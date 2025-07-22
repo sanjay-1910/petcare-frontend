@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Disease Predictor</title>
+    <link rel="stylesheet" href="disease.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="stethoscope-icon">🩺</div>
+                <h1>PetCare Advisor</h1>
+            </div>
+            <p class="subtitle">A smart tool to help identify potential health concerns based on your pet's symptoms.</p>
+        </header>
+
+        <main>
+            <section class="assessment-card">
+                <h2>Let's Check Your Pet's Health</h2>
+
+                <div class="pet-selector">
+                    <label for="pet-select">Select your pet type</label>
+                    <div class="custom-select" id="petSelectContainer">
+                        <div class="select-selected">Choose a pet...</div>
+                        <div class="select-items select-hide"></div>
+                    </div>
+                </div>
+
+                <div id="symptomSection" class="hidden">
+                    <h3>Select Symptoms</h3>
+                    <div id="symptomGrid" class="symptom-grid"></div>
+
+                    <div class="symptom-counter">
+                        Selected symptoms: <span id="symptomCount">0</span>
+                    </div>
+
+                    <button id="predictButton" class="predict-button" disabled>
+                        <span id="buttonText">Predict Possible Conditions</span>
+                        <div id="loadingSpinner" class="loading-spinner hidden">🔄</div>
+                    </button>
+                </div>
+            </section>
+
+            <section id="resultsSection" class="results-section hidden">
+                <h3>Health Assessment Results</h3>
+
+                <div id="consultationWarning" class="warning-box">
+                    <div class="warning-icon">⚠️</div>
+                    <p><strong>Veterinary consultation recommended.</strong> These results are only indicative and not a replacement for professional veterinary diagnosis.</p>
+                </div>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h4>🔍 Possible Conditions</h4>
+                        <ul id="diseasesList"></ul>
+                    </div>
+
+                    <div class="result-card">
+                        <h4>💉 Recommended Vaccinations</h4>
+                        <ul id="vaccinesList"></ul>
+                    </div>
+                </div>
+
+                <div class="precautions-section">
+                    <h4>🛡️ Precautionary Steps</h4>
+                    <ul id="precautionsList" class="precautions-list"></ul>
+                </div>
+
+                <div id="severityIndicator" class="severity-indicator"></div>
+
+                <div class="appointment-cta">
+                    <h3>📋 Next Steps</h3>
+                    <ul id="nextStepsList"></ul>
+                    <div class="cta-buttons">
+                        <a href="#" class="book-button">📅 Book Appointment</a>
+                        <a href="tel:+1234567890" class="call-button">📞 Call Vet Directly</a>
+                    </div>
+                </div>
+
+                <p class="disclaimer">Note: This is an automated assessment based on the symptoms you've selected. Always consult with a veterinarian for a proper diagnosis.</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>Created with ❤️ for pet wellness</p>
+            <p>© 2025 PetCare Advisor | This is a demonstration tool and not a substitute for professional veterinary care</p>
+        </footer>
+    </div>
+
+    <script src="disease prediction app.js"></script>
+</body>
+</html>

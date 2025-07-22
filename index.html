@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Pet Care Management</title>
+    <link rel="stylesheet" href="main_home.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Pet Care</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#profile_page_final.html">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero-section">
+        <img src="\images\petsimage.jpeg" alt="Pet Care">
+        <div class="buttons">
+            <button id="registerBtn">Register</button>
+            <button id="loginBtn">Login</button>
+        </div>
+    </section>
+
+    <!-- Register Popup -->
+    <div id="registerPopup" class="popup">
+        <div class="form-container">
+            <h2 class="reg-log">Register</h2>
+            <input type="text" id="registerUsername" placeholder="Username">
+            <input type="email" id="registerEmail" placeholder="Email">
+            <input type="password" id="registerPassword" placeholder="Password">
+            <button id="registerSubmit">Register</button>
+            <button class="close" onclick="closePopup('registerPopup')">Close</button>
+        </div>
+    </div>
+
+    <!-- Login Popup -->
+    <div id="loginPopup" class="popup">
+        <div class="form-container">
+            <h2 class="reg-log">Login</h2>
+            <input type="text" id="loginUsername" placeholder="Username">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button id="loginSubmit">Login</button>
+            <button class="close" onclick="closePopup('loginPopup')">Close</button>
+        </div>
+    </div>
+    <section id="services" class="services-section">
+        <h2>Our Services</h2>
+        <div class="services-container">
+            <div class="service-box">
+                <img src="../images/pet walking.webp" alt="Pet Walking">
+                <h3>Vaccination Scheduling</h3>
+                <p>Schedule your pet’s vaccinations with ease! Get friendly email reminders a day before – never miss a dose</p>
+            </div>
+            <div class="service-box">
+                <img src="../images/pet grooming.jpg" alt="Pet Grooming">
+                <h3>Chatbot</h3>
+                <p>Ask anything about your pet’s health, care, or needs. Our chatbot is here 24/7 to guide you!</p>
+            </div>
+            <!-- <div class="service-box">
+                <img src="../images/pet sitting.jpg" alt="Pet Sitting">
+                <h3>Pet Sitting</h3>
+                <p>Reliable pet sitting when you're away.</p>
+            </div> -->
+            <div class="service-box">
+                <img src="../images/pet veternanian.jpg" alt="Veterinarian Consulting">
+                <h3>Veterinarian Search</h3>
+                <p>Find the best veterinarians near you in seconds. Get details, timings, and reviews – all in one place!</p>
+            </div>
+            <div class="service-box">
+                <img src="../images/vaccination.jpg" alt="Vaccination Scheduling">
+                <h3>Disease Prediction</h3>
+                <p>Predict your pet’s health issues early. Enter symptoms and get instant suggestions on possible diseases</p>
+            </div>
+            <!-- <div class="service-box">
+                <img src="../images/health monitoring.jpg" alt="Health Tracking">
+                <h3>Health Tracking</h3>
+                <p>Monitor your pet's health records easily.</p>
+            </div> -->
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <h2>About Us</h2>
+        <p>Welcome to your trusted companion in pet care—where love meets technology. We believe pets are not just animals, but beloved members of the family, and they deserve the best care possible. Our platform is designed to make every aspect of pet care simple, smart, and stress-free. From scheduling timely vaccinations and receiving gentle reminders, to instantly finding reliable veterinarians near you, we’ve got it all covered. Concerned about your pet’s health? Our AI-powered Disease Predictor offers quick insights into symptoms, helping you stay informed and prepared. And for any quick questions or guidance, our intelligent 24/7 Chatbot is always ready to assist. With a clean design, user-friendly tools, and thoughtful features, we’re here to support you in every step of your pet’s health journey—because when your pet is happy and healthy, so are you.</p>
+    </section>
+
+    <!-- Footer Section -->
+    <section id="contact" class="footer-section">
+        <h2>Contact Us</h2>
+        <p>Email: support@petcare.com</p>
+        <p>Phone: +91 1234567890</p>
+        <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </section>
+    <footer class="footer">
+  <p>&copy; 2025 PetCare+. All rights reserved.</p>
+</footer>
+
+    <script>
+        // Function to open a popup
+        function openPopup(popupId) {
+            document.getElementById(popupId).style.display = "flex";
+        }
+        // Function to close a popup
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = "none";
+        }  
+        // Event listeners for opening popups
+        document.getElementById("registerBtn").addEventListener("click", () => openPopup("registerPopup"));
+        document.getElementById("loginBtn").addEventListener("click", () => openPopup("loginPopup"));
+        // Register Event Listener
+        document.querySelector("#registerPopup button:not(.close)").addEventListener("click", async () => {
+            const username = document.querySelector("#registerPopup input[type='text']").value;
+            const email = document.querySelector("#registerPopup input[type='email']").value;
+            const password = document.querySelector("#registerPopup input[type='password']").value;
+    
+            if (!username || !email || !password) {
+                alert("Please fill in all fields.");
+                return;
+            }
+    
+            const response = await fetch("http://localhost:5002/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, email, password })
+            });
+    
+            if (response.ok) {
+                closePopup("registerPopup");
+
+                const response = await fetch("http://localhost:5002/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json(); // Parse JSON response
+
+                if (response.ok) {
+                    // Store userId in localStorage for future use
+                    localStorage.setItem("userId", data.userId);
+                    closePopup("loginPopup");
+                    window.location.href = "profile_page_final.html"; // Redirect to profile page
+                } else {
+                    alert(data.message); // Show error message if login fails
+                }
+
+                // window.location.href = "profile_page_final.html"; // Redirect to chatbot.html
+            } else {
+                const data = await response.json();
+                alert(data.message); // Show error message only on failure
+            }
+        });
+    document.querySelector("#loginPopup button:not(.close)").addEventListener("click", async () => {
+    const username = document.querySelector("#loginPopup input[type='text']").value;
+    const password = document.querySelector("#loginPopup input[type='password']").value;
+
+    if (!username || !password) {
+        alert("Please enter both username and password.");
+        return;
+    }
+
+    const response = await fetch("http://localhost:5002/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json(); // Parse JSON response
+
+    if (response.ok) {
+        // Store userId in localStorage for future use
+        localStorage.setItem("userId", data.userId);
+        closePopup("loginPopup");
+        window.location.href = "profile_page_final.html"; // Redirect to profile page
+    } else {
+        alert(data.message); // Show error message if login fails
+    }
+});
+
+</script>
+</body>
+</html>
