@@ -44,11 +44,7 @@ class VetFinder {
         }, 300);
     }
 
-    // const BASE_URL = window.location.hostname.includes('localhost')
-    // ? 'http://localhost:5002'
-    // : 'https://petcare-backend-fu30.onrender.com';
 
-    // Fetch autocomplete results
     async fetchAutocomplete(query) {
     try {
         let BASE_URL = 'https://petcare-backend-fu30.onrender.com';
@@ -116,6 +112,7 @@ class VetFinder {
       location: this.selectedLocation || location,
       placeId: this.selectedPlaceId
     };
+    let BASE_URL = 'https://petcare-backend-fu30.onrender.com';
 
     const response = await fetch(`${BASE_URL}/api/search/veterinary`, {
       method: 'POST',
