@@ -108,88 +108,92 @@
   <p>&copy; 2025 PetCare+. All rights reserved.</p>
 </footer>
 
-    <script>
-        // Function to open a popup
-        function openPopup(popupId) {
-            document.getElementById(popupId).style.display = "flex";
+<script>
+    // Function to open a popup
+    function openPopup(popupId) {
+        document.getElementById(popupId).style.display = "flex";
+    }
+
+    // Function to close a popup
+    function closePopup(popupId) {
+        document.getElementById(popupId).style.display = "none";
+    }
+
+    // Event listeners for opening popups
+    document.getElementById("registerBtn").addEventListener("click", () => openPopup("registerPopup"));
+    document.getElementById("loginBtn").addEventListener("click", () => openPopup("loginPopup"));
+
+    // Register Event Listener
+    document.querySelector("#registerPopup button:not(.close)").addEventListener("click", async () => {
+        const username = document.querySelector("#registerPopup input[type='text']").value;
+        const email = document.querySelector("#registerPopup input[type='email']").value;
+        const password = document.querySelector("#registerPopup input[type='password']").value;
+
+        if (!username || !email || !password) {
+            alert("Please fill in all fields.");
+            return;
         }
-        // Function to close a popup
-        function closePopup(popupId) {
-            document.getElementById(popupId).style.display = "none";
-        }  
-        // Event listeners for opening popups
-        document.getElementById("registerBtn").addEventListener("click", () => openPopup("registerPopup"));
-        document.getElementById("loginBtn").addEventListener("click", () => openPopup("loginPopup"));
-        // Register Event Listener
-        document.querySelector("#registerPopup button:not(.close)").addEventListener("click", async () => {
-            const username = document.querySelector("#registerPopup input[type='text']").value;
-            const email = document.querySelector("#registerPopup input[type='email']").value;
-            const password = document.querySelector("#registerPopup input[type='password']").value;
-    
-            if (!username || !email || !password) {
-                alert("Please fill in all fields.");
-                return;
-            }
-    
-            const response = await fetch("https://petcare-backend-fu30.onrender.com/register", {
+
+        const registerResponse = await fetch("https://petcare-backend-fu30.onrender.com/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email, password })
+        });
+
+        if (registerResponse.ok) {
+            closePopup("registerPopup");
+
+            // Auto login after register
+            const loginResponse = await fetch("https://petcare-backend-fu30.onrender.com/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, email, password })
+                body: JSON.stringify({ username, password })
             });
-    
-            if (response.ok) {
-                closePopup("registerPopup");
 
-                const response = await fetch("https://petcare-backend-fu30.onrender.com/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ username, password })
-                });
+            const data = await loginResponse.json();
 
-                const data = await response.json(); // Parse JSON response
-
-                if (response.ok) {
-                    // Store userId in localStorage for future use
-                    localStorage.setItem("userId", data.userId);
-                    closePopup("loginPopup");
-                    window.location.href = "profile_page_final.html"; // Redirect to profile page
-                } else {
-                    alert(data.message); // Show error message if login fails
-                }
-
-                // window.location.href = "profile_page_final.html"; // Redirect to chatbot.html
+            if (loginResponse.ok) {
+                localStorage.setItem("userId", data.userId);
+                localStorage.setItem("token", data.token); // ✅ STORE THE TOKEN
+                closePopup("loginPopup");
+                window.location.href = "profile_page_final.html";
             } else {
-                const data = await response.json();
-                alert(data.message); // Show error message only on failure
+                alert(data.message);
             }
-        });
-    document.querySelector("#loginPopup button:not(.close)").addEventListener("click", async () => {
-    const username = document.querySelector("#loginPopup input[type='text']").value;
-    const password = document.querySelector("#loginPopup input[type='password']").value;
-
-    if (!username || !password) {
-        alert("Please enter both username and password.");
-        return;
-    }
-
-    const response = await fetch("https://petcare-backend-fu30.onrender.com/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
+        } else {
+            const data = await registerResponse.json();
+            alert(data.message);
+        }
     });
 
-    const data = await response.json(); // Parse JSON response
+    // Login Event Listener
+    document.querySelector("#loginPopup button:not(.close)").addEventListener("click", async () => {
+        const username = document.querySelector("#loginPopup input[type='text']").value;
+        const password = document.querySelector("#loginPopup input[type='password']").value;
 
-    if (response.ok) {
-        // Store userId in localStorage for future use
-        localStorage.setItem("userId", data.userId);
-        closePopup("loginPopup");
-        window.location.href = "profile_page_final.html"; // Redirect to profile page
-    } else {
-        alert(data.message); // Show error message if login fails
-    }
-});
+        if (!username || !password) {
+            alert("Please enter both username and password.");
+            return;
+        }
 
+        const loginResponse = await fetch("https://petcare-backend-fu30.onrender.com/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password })
+        });
+
+        const data = await loginResponse.json();
+
+        if (loginResponse.ok) {
+            localStorage.setItem("userId", data.userId);
+            localStorage.setItem("token", data.token); // ✅ STORE THE TOKEN
+            closePopup("loginPopup");
+            window.location.href = "profile_page_final.html";
+        } else {
+            alert(data.message);
+        }
+    });
 </script>
+
 </body>
 </html>

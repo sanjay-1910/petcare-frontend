@@ -44,20 +44,25 @@ class VetFinder {
         }, 300);
     }
 
+    const BASE_URL = window.location.hostname.includes('localhost')
+    ? 'http://localhost:5002'
+    : 'https://petcare-backend-fu30.onrender.com';
+
+    // Fetch autocomplete results
     async fetchAutocomplete(query) {
-        try {
-            const response = await fetch(`/api/places/autocomplete?input=${encodeURIComponent(query)}`);
-            const data = await response.json();
-            
-            if (data.error) {
-                console.error('Autocomplete error:', data.error);
-                return;
-            }
-            
-            this.displayAutocomplete(data.predictions || []);
-        } catch (error) {
-            console.error('Autocomplete fetch error:', error);
+    try {
+        const response = await fetch(`${BASE_URL}/api/places/autocomplete?input=${encodeURIComponent(query)}`);
+        const data = await response.json();
+
+        if (data.error) {
+        console.error('Autocomplete error:', data.error);
+        return;
         }
+
+        this.displayAutocomplete(data.predictions || []);
+    } catch (error) {
+        console.error('Autocomplete fetch error:', error);
+    }
     }
 
     displayAutocomplete(predictions) {
@@ -94,47 +99,47 @@ class VetFinder {
     }
 
     async handleSearch() {
-        const locationInput = document.getElementById('locationInput');
-        const location = locationInput.value.trim();
-        
-        if (!location) {
-            this.showError('Please enter a location to search');
-            return;
-        }
+  const locationInput = document.getElementById('locationInput');
+  const location = locationInput.value.trim();
 
-        this.showLoading();
-        this.hideAllSections();
+  if (!location) {
+    this.showError('Please enter a location to search');
+    return;
+  }
 
-        try {
-            const searchData = {
-                location: this.selectedLocation || location,
-                placeId: this.selectedPlaceId
-            };
+  this.showLoading();
+  this.hideAllSections();
 
-            const response = await fetch('/api/search/veterinary', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(searchData)
-            });
+  try {
+    const searchData = {
+      location: this.selectedLocation || location,
+      placeId: this.selectedPlaceId
+    };
 
-            const data = await response.json();
-            
-            if (data.error) {
-                this.showError(data.error);
-                return;
-            }
+    const response = await fetch(`${BASE_URL}/api/search/veterinary`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(searchData)
+    });
 
-            this.hideLoading();
-            this.displayResults(data.results || [], location);
-            
-        } catch (error) {
-            console.error('Search error:', error);
-            this.hideLoading();
-            this.showError('Failed to search veterinary hospitals. Please try again.');
-        }
+    const data = await response.json();
+
+    if (data.error) {
+      this.showError(data.error);
+      return;
     }
+
+    this.hideLoading();
+    this.displayResults(data.results || [], location);
+
+  } catch (error) {
+    console.error('Search error:', error);
+    this.hideLoading();
+    this.showError('Failed to search veterinary hospitals. Please try again.');
+  }
+}
 
     displayResults(results, location) {
         if (results.length === 0) {
