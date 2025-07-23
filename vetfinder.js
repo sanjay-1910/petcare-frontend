@@ -1,3 +1,4 @@
+let BASE_URL = 'https://petcare-backend-fu30.onrender.com';
 class VetFinder {
     constructor() {
         this.selectedPlaceId = null;
@@ -47,7 +48,6 @@ class VetFinder {
 
     async fetchAutocomplete(query) {
     try {
-        let BASE_URL = 'https://petcare-backend-fu30.onrender.com';
         const response = await fetch(`${BASE_URL}/api/places/autocomplete?input=${encodeURIComponent(query)}`);
         const data = await response.json();
 
@@ -112,7 +112,6 @@ class VetFinder {
       location: this.selectedLocation || location,
       placeId: this.selectedPlaceId
     };
-    let BASE_URL = 'https://petcare-backend-fu30.onrender.com';
 
     const response = await fetch(`${BASE_URL}/api/search/veterinary`, {
       method: 'POST',
