@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const editPetProfileBtn = document.getElementById("edit-pet-profile");
   // const prof = document.getElementById("prof");
   // Edit profile
+  profilePictureUpload.classList.add("hidden");
+
   editProfileBtn.addEventListener("click", () => {
     profileNameInput.removeAttribute("disabled");
     profileEmailInput.removeAttribute("disabled");
@@ -31,8 +33,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const response = await fetch("https://petcare-backend-fu30.onrender.com/updateProfile", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId, name, email })
+      body: JSON.stringify({ name, email })
     });
 
     const data = await response.json();
@@ -42,7 +45,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       profileEmailInput.setAttribute("disabled", true);
       saveProfileBtn.style.display = "none";
       editProfileBtn.style.display = "inline-block";
-      
+      profilePictureUpload.classList.add("hidden");
+
     } else {
       alert("Profile update failed.");
     }
@@ -66,6 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     fetch("https://petcare-backend-fu30.onrender.com/updateProfilePicture", {
       method: "POST",
       body: formData,
+      credentials: "include"
     })
       .then(res => res.json())
       .then(data => {
@@ -127,9 +132,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const response = await fetch("https://petcare-backend-fu30.onrender.com/savePetProfile", {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        userId, pet_name, pet_type, pet_breed, pet_age, pet_weight
+        pet_name, pet_type, pet_breed, pet_age, pet_weight
       })
     });
 
