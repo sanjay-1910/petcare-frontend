@@ -98,7 +98,8 @@
     }
 
     // Assume current logged-in userId is available (you need to set this from session or global JS)
-    const userId = 1; // Replace this with real dynamic user ID
+    // const userId = 1; // Replace this with real dynamic user ID
+    const userId = localStorage.getItem("userId");
 
     const data = {
         userId: userId,
