@@ -1,5 +1,6 @@
-let BASE_URL = 'https://petcare-backend-fu30.onrender.com';
+// let BASE_URL = 'https://petcare-backend-fu30.onrender.com';
 class VetFinder {
+    static BASE_URL = 'https://petcare-backend-fu30.onrender.com';
     constructor() {
         this.selectedPlaceId = null;
         this.selectedLocation = null;
